@@ -72,9 +72,9 @@ class Background(Widget):
         self.image_dupe = Sprite(source=source, x=self.width)
         self.add_widget(self.image_dupe)
 
-    def update(self):
-        self.image.x -= 1 * params.scale
-        self.image_dupe.x -= 1 * params.scale
+    def update(self, dt):
+        self.image.x -= 60 * params.scale * dt
+        self.image_dupe.x -= 60 * params.scale * dt
         if self.image.right <= 0:
             self.image.x = 0
             self.image_dupe.x = self.width
