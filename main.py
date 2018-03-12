@@ -59,10 +59,11 @@ class Terrain(Widget):
                     print "none"
                     randx = last_ob_x = 0;
 
-                while (randx - last_ob_x) < 150 :
-                    print "redo...."
-                    print (randx - last_ob_x)
-                    randx = self.filled_to + randint(1, floor.size[0])
+                # while (randx - last_ob_x) < 500 :
+                #     print "redo...."
+                #     print (randx - last_ob_x)
+
+                randx = self.filled_to + randint(1, floor.size[0])
                 self.last_obsticle_x = randx
 
                 pos = (randx , self.floor - 5 * params.scale)
