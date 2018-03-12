@@ -210,7 +210,12 @@ class FlappyApp(App):
 class params(object):
     def init(self):
         self.bg_width, self.bg_height = 288, 384
-        self.width, self.height = Window.size
+        if Window != None:
+            self.width, self.height = Window.size
+        else: 
+            self.width, self.height = (288, 384)
+            self.scale = 1
+            return
         self.center = Window.center
         ws = float(self.width) / self.bg_width
         hs = float(self.height) / self.bg_height

@@ -43,8 +43,8 @@ class Terrain(Widget):
     def fill(self, init=False):
         if self.filled_to < self.screen_dim[0]:
             pos = (self.filled_to, self.floor - (34 * params.scale))
-            print params.scale
-            print pos
+            print (params.scale)
+            print (pos)
             floor = Sprite(texture=self.tiles['floor'], pos=pos)
 
             self.add_widget(floor)
@@ -53,17 +53,16 @@ class Terrain(Widget):
             if not init:
 
                 if self.last_obsticle != None:
-                    print "not none"
+                    print ("not none")
                     randx = last_ob_x = self.last_obsticle.pos[0]
                 else:
-                    print "none"
+                    print ("none")
                     randx = last_ob_x = 0;
 
-                # while (randx - last_ob_x) < 500 :
-                #     print "redo...."
-                #     print (randx - last_ob_x)
-
-                randx = self.filled_to + randint(1, floor.size[0])
+                while (randx - last_ob_x) < 150 :
+                    print ("redo....")
+                    print (randx - last_ob_x)
+                    randx = self.filled_to + randint(1, floor.size[0])
                 self.last_obsticle_x = randx
 
                 pos = (randx , self.floor - 5 * params.scale)
@@ -85,9 +84,9 @@ class Terrain(Widget):
 
         for e in self.obstacles:
             if e.collide_widget(self.player) and (self.player.pos[1] < 70):
-                print "Game Over"
+                print ("Game Over")
                 game_over = True
-                print self.player.pos[1]
+                print (self.player.pos[1])
         self.filled_to -= self.velocity * dt
 
         while not self.fill():
@@ -123,7 +122,7 @@ class Player(Sprite):
             self.velocity_y = 400;
             self.y = self.floor+1
 
-        print "jump"
+        print ("jump")
 
     # def on_touch_down(self, *ignore):
     #     self.velocity_y = 5.5 * params.scale
