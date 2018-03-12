@@ -215,6 +215,9 @@ class params(object):
         else: 
             self.width, self.height = (288, 384)
             self.scale = 1
+            ws = 1
+            hs = 1
+            self.scale = min(ws,hs) 
             return
         self.center = Window.center
         ws = float(self.width) / self.bg_width
@@ -231,6 +234,4 @@ class params(object):
 params = params()
 
 
-if __name__ == '__main__':
-    FlappyApp().run()
 
