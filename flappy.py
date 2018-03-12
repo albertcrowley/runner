@@ -16,21 +16,21 @@ from kivy.graphics import Color, Rectangle
 from kivy_fix import SpriteAtlas
 
 
-class MultiSound(object):
-    def __init__(self, file, num):
-        self.num = num
-        self.sounds = [SoundLoader.load(file) for n in range(num)]
-        self.index = 0
+# class MultiSound(object):
+#     def __init__(self, file, num):
+#         self.num = num
+#         self.sounds = [SoundLoader.load(file) for n in range(num)]
+#         self.index = 0
+#
+#     def play(self):
+#         self.sounds[self.index].play()
+#         self.index += 1
+#         if self.index == self.num:
+#             self.index = 0
 
-    def play(self):
-        self.sounds[self.index].play()
-        self.index += 1
-        if self.index == self.num:
-            self.index = 0
-
-sfx_flap = MultiSound('audio/flap.wav', 3)
-sfx_score = SoundLoader.load('audio/score.wav')
-sfx_die = SoundLoader.load('audio/die.wav')
+# sfx_flap = MultiSound('audio/flap.wav', 3)
+# sfx_score = SoundLoader.load('audio/score.wav')
+# sfx_die = SoundLoader.load('audio/die.wav')
 
 
 class Sprite(Image):
@@ -60,7 +60,7 @@ class Bird(Sprite):
     def on_touch_down(self, *ignore):
         self.velocity_y = 5.5 * params.scale
         self.texture = self.images['wing-down']
-        sfx_flap.play()
+        # sfx_flap.play()
 
 
 class Background(Widget):
@@ -171,11 +171,11 @@ class Game(Widget):
                 pipe.scored = True
                 self.score += 1
                 self.score_label.text = str(self.score)
-                sfx_score.play()
+                # sfx_score.play()
 
         if self.game_over:
             self.over_label.opacity = 1
-            sfx_die.play()
+            # sfx_die.play()
             self.bind(on_touch_down=self._on_touch_down)
 
     def _on_touch_down(self, *ignore):
