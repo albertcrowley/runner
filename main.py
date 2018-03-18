@@ -1,4 +1,6 @@
 import kivy
+import platform
+
 kivy.require('1.1.1')
 
 from kivy.app import App
@@ -8,12 +10,12 @@ from kivy.properties import NumericProperty, ReferenceListProperty,\
 from kivy.vector import Vector
 from kivy.clock import Clock
 
-from flappy import Sprite
-from kivy_fix import SpriteAtlas
-from flappy import params
-from flappy import Background
+from game_utils import params
+from game_utils import Sprite
+from game_utils import SpriteAtlas
+from game_utils import Background
 from kivy.uix.label import Label
-from flappy import Blank
+from game_utils import Blank
 from kivy.core.window import Window
 
 import math
@@ -51,20 +53,7 @@ class Terrain(Widget):
 
 
             if not init:
-
-                if self.last_obsticle != None:
-                    print ("not none")
-                    randx = last_ob_x = self.last_obsticle.pos[0]
-                else:
-                    print ("none")
-                    randx = last_ob_x = 0;
-
-                while (randx - last_ob_x) < 150 :
-                    print ("redo....")
-                    print (randx - last_ob_x)
-                    randx = self.filled_to + randint(1, floor.size[0])
-                self.last_obsticle_x = randx
-
+                randx = self.filled_to + randint(1, floor.size[0])
                 pos = (randx , self.floor - 5 * params.scale)
                 block = Sprite(texture=self.tiles['block'], pos=pos )
                 self.obstacles.append(block)
@@ -124,22 +113,6 @@ class Player(Sprite):
 
         print ("jump")
 
-    # def on_touch_down(self, *ignore):
-    #     self.velocity_y = 5.5 * params.scale
-    #     self.texture = self.images['wing-down']
-
-#
-# class PongPaddle(Widget):
-#     score = NumericProperty(0)
-#
-#     def bounce_ball(self, ball):
-#         if self.collide_widget(ball):
-#             vx, vy = ball.velocity
-#             offset = (ball.center_y - self.center_y) / (self.height / 2)
-#             bounced = Vector(-1 * vx, vy)
-#             vel = bounced * 1.1
-#             ball.velocity = vel.x, vel.y + offset
-
 
 class PongGame(Widget):
     def __init__(self):
@@ -149,7 +122,9 @@ class PongGame(Widget):
 
         self.background = Background(source='background.png')
         self.size = self.background.size
-        Window.size = (self.size[0], self.size[1])
+
+        if platform.system() == "Windows":
+            Window.size = (self.size[0], self.size[1])
         params.init()
         self.floor = 34 * params.scale
 
